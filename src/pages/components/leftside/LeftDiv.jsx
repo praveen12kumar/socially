@@ -27,10 +27,21 @@ const LeftDiv = () => {
     setCurrentUser(JSON.parse(localStorage.getItem('userData')))
   },[])
 
+  const handleHome = ()=>{
+    setActive("Home");
+    navigate("/");
+  }
+  const handleBookmark = ()=>{
+    setActive("bookmark");
+    navigate('/bookmark');
+  }
+
+
+
   return (
     <div className="explore-section">
       <div className="explore-main">
-        <div className="home-icon" onClick={() => setActive("home")}>
+        <div className="home-icon" onClick={handleHome}>
           <span>
             <AiOutlineHome />{" "}
           </span>{" "}
@@ -47,7 +58,7 @@ const LeftDiv = () => {
             Explore
           </span>
         </div>
-        <div className="bookmark" onClick={() => setActive("bookmark")}>
+        <div className="bookmark" onClick={handleBookmark }>
           <span>
             <BsBookmarkHeartFill />
           </span>{" "}

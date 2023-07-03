@@ -1,0 +1,28 @@
+@import "../../style/utils.scss";
+
+.bookmark-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: $background;
+    padding: 0rem 2rem;
+
+    >.bookmark-section{
+        width: 55%;
+
+        >.bookmark-heading{
+            display: flex;
+            justify-content: center;
+            padding-top: 5rem;
+        }
+        >.bookmark-main-container{
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}

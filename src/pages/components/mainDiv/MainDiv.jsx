@@ -6,7 +6,9 @@ import "./mainDiv.scss";
 const MainDiv = () => {
   return (
     <div className='feed-section'>
+      
       <CreatePost/>
+      
       <AllPost/>
     </div>
   )

@@ -9,7 +9,7 @@ import SignUp from "./pages/register/Signup";
 import HomeLayout from "./pages/layout/homeLayout/HomeLayout";
 import Profile from "./pages/profile/Profile";
 import IndividualUser from "./pages/individualUser/IndividualUser";
-
+import Bookmark from "./pages/bookmarks/Bookmark";
 
 import './App.css';
 import { AuthContext } from "./context/AuthContext";
@@ -42,6 +42,7 @@ function App() {
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/profile/" element={<Profile/>}/>
         <Route path="/user/:username" element={<IndividualUser/>}/>
+        <Route path="/bookmark" element={<Bookmark/>}/>
       </Routes>
     </div>
   );

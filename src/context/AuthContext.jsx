@@ -1,15 +1,14 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import {toast} from "react-toastify";
+
 
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({children})=>{
-  
+
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage?.getItem('encodedToken')?.length>0);
     const [currentUser, setCurrentUser] = useState({});
-
-    
 
     const userData = JSON.parse(localStorage.getItem('userData'));
   
@@ -46,8 +45,8 @@ export const AuthProvider = ({children})=>{
     const guestLogin = async()=>{
         try {
             const guestCreds = {
-                username:"adarshbalika",
-                password:"adarshBalika123",
+                username:"praveenkumar",
+                password:"!@12QWqw",
             }
 
             const response = await fetch('/api/auth/login',{
@@ -68,7 +67,6 @@ export const AuthProvider = ({children})=>{
         }
     }
 
-
     const signUp = async (signupInputValues, isValid) => {
        
         if (isValid?.isEmail && isValid?.isPassword && isValid?.isUsername && isValid?.isName) {
@@ -85,7 +83,10 @@ export const AuthProvider = ({children})=>{
                     setIsLoggedIn(true)
                     setCurrentUser(localStorage.getItem('userData'));
                     toast.success(`Welcome ${data?.createdUser?.firstName } ${data?.createdUser?.lastName}`)
-                    console.log("signup successful");
+                    // dataDispatch({
+                    //     type:"Add-new-user",
+                    //     payload: data.createdUser,
+                    // })
                 } else {
                     toast.error(`Error ${response?.status}: ${data?.errors[0]}`);
                 }

@@ -4,18 +4,20 @@ import SinglePost from '../singlePost/SinglePost';
 import "./allPost.scss";
 
 const AllPost = () => {
-  const {allPosts} = useContext(DataContext);
-  const userData  = JSON.parse(localStorage.getItem('userData'));
+  const {allPosts, state} = useContext(DataContext);
+
  
   
   return (
+    <>
+    <h1>Latest Posts</h1>
     <div className='allPost' >
-      <h1>Latest Posts</h1>
       {
-        allPosts.map((postData) =>
+        state.allPosts?.map((postData) =>
           <SinglePost postData={postData} key={postData._id}/>)
       }
     </div>
+    </>
   )
 }
 

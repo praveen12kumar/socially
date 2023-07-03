@@ -28,7 +28,7 @@ const RightDiv = () => {
         <p className="show_more">Show More</p>
       </div>
       <div className="suggestion_main">
-        {allUsers.filter((item)=>item.username !== userData.username).map((user) => (
+        {allUsers?.filter((item)=>item.username !== userData.username).map((user) => (
           <SuggestionCard user={user}  key={user.id}/>
         ))}
       </div>
