@@ -1,0 +1,17 @@
+@import "../../style/utils.scss";
+
+.individual-main-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    >.individual-component{
+        width: 55%;
+        min-height: 100vh;
+        max-width: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: $background;
+        
+    }
+}

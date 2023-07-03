@@ -1,0 +1,119 @@
+@import "../../../style/utils.scss";
+
+.singlePost-container{
+    width: 80%;
+    height: auto;
+    margin: 1rem 0rem;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    background-color: $secondary-color;
+    border: none;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+    >.singlePost-head{
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+
+        >.singlePost-postedBy{
+            width: 60%;
+            height: 100%;
+            display: flex;
+            >.postedBy-profile{
+                width: 50px;
+                height: 50px;
+                margin: 0px 0.5rem;
+
+                >img{
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                    border-radius: 50%;
+                }
+            }
+            >.singlePost-name-username-date{
+                font-family: Roboto;
+                margin: 0.2rem 0.5rem;
+                >.name{
+                    font-size: 16px;
+                    font-weight: 600;
+                    word-spacing: 1px;
+                }
+                >.username{
+                    font-size: 13px;
+                    font-weight: 300;
+                    color: $grey-color;
+                }
+            }
+            >.date{
+                font-size: 12px;
+                padding-top: 0.3rem;
+                font-weight: 400;
+            }
+        }
+        >.three-dots-container{
+            width: 30px;
+            height: 30px;
+            padding-right: 60px;
+            >.dots-icons{
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: 500;   
+            }
+            >.threeDotsMenu{
+                width: 60px;
+                height: 70px;
+                border-radius: 5px;
+                padding-left: 10px;
+                padding-top: 5px;
+                background-color: $white-color;
+
+                >p{
+                    font-family: Poppins;
+                    font-size: 15px;
+                    padding-bottom: 5px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    >.singlePost-body{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 0.5rem;
+        >.content-pic{
+            width: 100%;
+            height: auto;
+            
+            >.singlePost-content{
+                font-family: Poppins;
+                font-size: 16px;
+                line-height: 25px;
+                padding-bottom: 1rem;
+            }
+            >.singlePost-pic-container{
+                width: 550px;
+                height: 350px;
+                display: flex;
+                justify-content: center;
+                >.pic-container{
+                    width: 100%;
+                    height: 100%;
+
+                    >img{
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+}

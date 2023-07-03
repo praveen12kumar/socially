@@ -1,0 +1,133 @@
+@import "../../../style/utils.scss";
+
+.profile-container{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+ 
+    align-items: center;
+    
+    >.cover-photo{
+        width: 100%;
+        height: 40%;
+        >img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    >.profile-image-edit{
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        >.profile-image{
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            top: -70px;
+            left: 10px;
+            
+            >img{
+                width: 100%;
+                height: 100%;
+                border: 2px solid #fff;
+                border-radius: 50%;
+                
+            }
+        }
+        >.profile-edit{
+            width: 20%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            right: 10px;
+            top: 30px;
+    
+            >button{
+                height: 40px;
+                padding: 0.5rem 1rem;
+                border: none;
+                border-radius: 3px;
+                color: $white-color;
+                background-color: $violet-color;
+                font-family: Roboto;
+                font-size: 16px;
+                letter-spacing: 1px;
+                cursor: pointer;
+
+                &:hover{
+                    background-color: $white-color;
+                    color: $violet-color;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+    >.profile-details{
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+       
+        >.name-username-email{
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            font-family: Roboto;
+            >.name{
+                font-size: 22px;
+                font-weight: 600;
+                letter-spacing: 1px;
+            }
+            >.profile-username{
+                
+                
+                font-family: Roboto;
+                font-size: 16px;
+                letter-spacing: 1px;
+                cursor: pointer;           
+            }
+            >.email{
+                font-family: Roboto;
+                text-decoration: none;
+                color: black;
+                line-height: 24px;
+                font-size: 16px;
+            }
+            >.bio{
+                line-height: 24px;
+                font-size: 16px;
+            }
+            >.website{
+                text-decoration: none;
+                line-height: 24px;
+                font-size: 16px;
+            }
+        }
+        >.follow-unfollow{
+            width: 35%;
+            height: 30px;
+            display: flex;
+            margin-top: 50px;
+            justify-content: space-between;
+            
+            >button{
+                width: 40%;
+                height: 40px;
+                border: none;
+                border-radius: 3px;
+                color: $white-color;
+                background-color: black;
+                font-family: Roboto;
+                font-size: 16px;
+                letter-spacing: 1px;
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,0 +1,130 @@
+@import "../../style/utils.scss";
+
+.login-page{
+    width: 100%;
+    height: 100vh;
+    background-color:$background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    >.login-container{
+        width: 70%;
+        height: 70%;
+        display: flex;
+        justify-content: space-between;
+        box-shadow: rgba(0, 0,0, 0.3)0px 5px 10px;
+
+        >.login-section{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 6rem;
+            >p{
+                font-size: 20px;
+                font-weight: 600;
+                font-family: Roboto;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                padding: 10px;
+            }
+            >.login-form{
+                margin-top: 2rem;
+                width: 70%;
+
+                >.input-field-container{
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 5px 0px;
+                    >label{
+                        width: 20%;
+                        font-size: 14px;
+                        font-family: Poppins;
+                    }
+                    >input{
+                        width: 77%;
+                        outline: none;
+                        font-size: 12px;
+                        padding: 10px 5px;
+                        border: 1px solid $lynx-gray-color;
+                        border-radius: 5px;
+                        font-family: Poppins;
+                        letter-spacing: 1px;
+                        color: $black-color;
+                        font-weight: 400;
+                    }
+                    
+                }
+            }
+            >.button-container{
+                width: 70%;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+
+                >.login-guest{
+                    height: 70px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    >.login{
+                        width: 48%;
+                        padding: 8px 0px;
+                        border: 1px solid $lynx-gray-color;
+                        border-radius: 5px;
+                        background-color: $primary-color;
+                        font-size: 14px;
+                        font-weight: 600;
+                        letter-spacing: 4px;
+                        font-family: Roboto;
+                        color: $white-color;
+                        text-transform: uppercase;
+                    }
+                    >.guest{
+                        width: 48%;
+                        padding: 8px 0px;
+                        border: 1px solid $lynx-gray-color;
+                        border-radius: 5px;
+                        background-color: $grey-color;
+                        font-size: 14px;
+                        letter-spacing: 2px;
+                        font-family: Roboto;
+                        color: $black-color;
+                        text-transform: uppercase;
+                        font-weight: 600;
+                    }
+
+                }
+                >.signup-btn{
+                    width: 60%;
+                    margin: 0 auto;
+                    >.signup{
+                        width: 100%;
+                        padding: .6rem 1rem;
+                        font-size: 14px;
+                        border: none;
+                        background-color: $primary-color;
+                        color: $white-color;
+                        letter-spacing: 1px;
+                        font-family: Roboto;
+                        border-radius: 5px;
+                    }
+                }
+            }
+        }
+        >.side-image-section{
+            width: 50%;
+            height: 100%;
+           
+
+            >.image-container{
+                width: 100%;
+                height: 100%;
+                
+            }
+        }
+    }
+}

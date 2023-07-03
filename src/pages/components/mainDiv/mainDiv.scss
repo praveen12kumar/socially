@@ -1,0 +1,12 @@
+@import "../../../style/utils.scss";
+
+.feed-section{
+    width: 50%;
+    min-height: 100vh;
+    max-width: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $background; 
+}
