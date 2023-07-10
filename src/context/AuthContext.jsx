@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState } from "react";
 import {toast} from "react-toastify";
 
 
@@ -8,7 +8,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({children})=>{
 
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage?.getItem('encodedToken')?.length>0);
-    const [currentUser, setCurrentUser] = useState({});
+    //const [currentUser, setCurrentUser] = useState({});
 
     const userData = JSON.parse(localStorage.getItem('userData'));
   
@@ -28,7 +28,7 @@ export const AuthProvider = ({children})=>{
                 localStorage.setItem('encodedToken', data?.encodedToken);
                 localStorage.setItem('userData', `${JSON.stringify(data?.foundUser)}`)
                 setIsLoggedIn(true)
-                setCurrentUser(JSON.parse(localStorage.getItem('userData')));
+                //setCurrentUser(JSON.parse(localStorage.getItem('userData')));
                 toast.success("Successfully logged in");
                           
             }
@@ -58,7 +58,7 @@ export const AuthProvider = ({children})=>{
                 localStorage.setItem('encodedToken', data?.encodedToken);
                 localStorage.setItem('userData', `${JSON.stringify(data?.foundUser)}`);
                 setIsLoggedIn(true)
-                setCurrentUser(JSON.parse(localStorage.getItem('userData')));
+                //setCurrentUser(JSON.parse(localStorage.getItem('userData')));
                 toast.success(`Welcome ${data?.foundUser?.firstName } ${data?.foundUser?.lastName}`)
                     
             }
@@ -81,7 +81,7 @@ export const AuthProvider = ({children})=>{
                     localStorage.setItem('encodedToken', data?.encodedToken);
                     localStorage.setItem('userData', `${JSON.stringify(data?.createdUser)}`)
                     setIsLoggedIn(true)
-                    setCurrentUser(localStorage.getItem('userData'));
+                    //setCurrentUser(localStorage.getItem('userData'));
                     toast.success(`Welcome ${data?.createdUser?.firstName } ${data?.createdUser?.lastName}`)
                     // dataDispatch({
                     //     type:"Add-new-user",
@@ -107,7 +107,7 @@ export const AuthProvider = ({children})=>{
     
 
     return(
-        <AuthContext.Provider value={{login,currentUser, setCurrentUser, signUp, isLoggedIn, guestLogin, logout, userData}}>
+        <AuthContext.Provider value={{login,signUp, isLoggedIn, guestLogin, logout, userData}}>
             {children}
         </AuthContext.Provider>
     )

@@ -9,10 +9,12 @@ import { AuthContext } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { randomProfilePic } from "../../../resources/randomImages/RandomImages";
 import "./leftDiv.scss";
+import { DataContext } from "../../../context/DataContext";
 
 
 const LeftDiv = () => {
-  const { logout, currentUser, setCurrentUser } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
+  const {currentuser} = useContext(DataContext)
   const [active, setActive] = useState("home");
  
   
@@ -23,10 +25,6 @@ const LeftDiv = () => {
   };
 
 
-  useEffect(()=>{
-    setCurrentUser(JSON.parse(localStorage.getItem('userData')))
-  },[])
-
   const handleHome = ()=>{
     setActive("Home");
     navigate("/");
@@ -35,6 +33,11 @@ const LeftDiv = () => {
     setActive("bookmark");
     navigate('/bookmark');
   }
+  const handleExplore = ()=>{
+    navigate("/explore");
+    setActive("explore");
+ 
+}
 
 
 
@@ -50,7 +53,7 @@ const LeftDiv = () => {
             Home{" "}
           </span>
         </div>
-        <div className="explore" onClick={() => setActive("explore")}>
+        <div className="explore" onClick={handleExplore}>
           <span>
             <BsRocketFill />
           </span>
@@ -86,11 +89,11 @@ const LeftDiv = () => {
       </div>
       <div className="bottom-profile" onClick={()=> navigate('/profile')}>
           <div className="profile-img">
-            <img src={currentUser.profile_pic ? currentUser.profile_pic : randomProfilePic } alt="profile" />
+            <img src={currentuser?.profile_pic ? currentuser?.profile_pic : randomProfilePic } alt="profile" />
           </div>
           <div className="user-name-email">
-            <p className="user-name">{currentUser.firstName} {currentUser.lastName}</p>
-            <p className="user-username">@{currentUser.username}</p>
+            <p className="user-name">{currentuser?.firstName} {currentuser?.lastName}</p>
+            <p className="user-username">@{currentuser?.username}</p>
           </div>
       </div>
     </div>

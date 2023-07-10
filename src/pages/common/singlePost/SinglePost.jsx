@@ -15,22 +15,27 @@ import {toast} from "react-toastify";
 import axios from "axios";
 
 const SinglePost = ({ postData }) => {
+
+  console.log("postData", postData);
+
+
   const token = (localStorage.getItem('encodedToken'));
   const navigate = useNavigate();
   const profileId = JSON.parse(localStorage.getItem("userData"))?._id;
   const [isThreDotsOpen, setIsThreDotsOpen] = useState(false);
   const [isEditPostModal, setIsEditPostModal] = useState(false);
+  const {allUsers, bookmarks, dataDispatch, currentuser} = useContext(DataContext);
 
-  const {state, bookmarks, dataDispatch} = useContext(DataContext);
-
+  const userData = allUsers?.find((user)=> user.username === postData.username);
+  console.log("userData", userData);
+  
   const deleteClickHandler = () => {};
   
+// =========      bookmarks         =============================
+
   const addBookmark = async(postId, token)=>{
     try{
-      const {data:{bookmarks},status}= await axios.post(`/api/users/bookmark/${postId}`, {}, {headers:{authorization:token}});
-        console.log("newly Added Bookmark", bookmarks);
-        console.log("state at added bookmark", state);
-        
+      const {data:{bookmarks}}= await axios.post(`/api/users/bookmark/${postId}`, {}, {headers:{authorization:token}});
         dataDispatch({
           type:"getNewBookmarks",
           payload:bookmarks,
@@ -44,8 +49,8 @@ const SinglePost = ({ postData }) => {
 
   const deleteBookmark = async (postId, token) => {
     try{
-      const {data:{bookmarks},status} = await axios.post(`/api/users/remove-bookmark/${postId}`,{}, {headers:{authorization:token}})
-      console.log("Bookmarks after deletion", bookmarks);
+      const {data:{bookmarks}} = await axios.post(`/api/users/remove-bookmark/${postId}`,{}, {headers:{authorization:token}})
+      
       toast.warn("Bookmark Removed");
       dataDispatch({
         type:"getNewBookmarks",
@@ -57,7 +62,6 @@ const SinglePost = ({ postData }) => {
     }
   };
  
-  
   const checkBookmark =(postId, bookmarks)=>{
     return bookmarks.some((bokmark)=> bokmark._id === postId)
   }
@@ -66,7 +70,51 @@ const SinglePost = ({ postData }) => {
     checkBookmark(postId, bookmarks) ? deleteBookmark(postId,token) : addBookmark(postId,token) 
   }
 
-  
+  // =====================Likes and Unlikes =================
+
+  const addLike = async (postId, token)=>{
+        try{
+          const {data:{posts},status} = await axios.post(`/api/posts/like/${postId}`,{},{headers:{authorization:token}})
+          console.log("Posts after like ", posts);
+          dataDispatch({
+            type:"AllPosts",
+            payload:posts,
+          })
+          toast.success("Like updated");
+        }
+        catch(err){
+          console.error(err)
+        }
+  }
+
+  const removeLike = async (postId, token)=>{
+      try{
+          const{data:{posts},status} = await axios.post(`/api/posts/dislike/${postId}`,{},{headers:{authorization:token}})
+          console.log("posts after remove like", posts);
+         
+          dataDispatch({
+            type:"AllPosts",
+            payload:posts,
+          })
+          toast.warn("Like Removed");
+
+      }
+      catch(err){
+          console.log(err)
+      }
+  }
+
+  const checkLikes = (postData)=>{
+    
+    return (postData?.likes?.likedBy?.some((like)=> like._id === currentuser?._id))
+  }
+
+  const handleLikes = (postData, token)=>{
+    checkLikes(postData) ? removeLike(postData._id, token) : addLike(postData._id, token);
+  }
+
+
+  //console.log("postData", postData);
 
   return (
     
@@ -76,18 +124,18 @@ const SinglePost = ({ postData }) => {
         <div className="singlePost-postedBy">
           {" "}
           {/*navigate to postedId page*/}
-          <div className="postedBy-profile">
+          <div className="postedBy-profile" onClick={()=>navigate(`/user/${postData.username}`)}>
             <img
               src={
-                postData?.postedBy?.profile_pic
-                  ? postData?.postedBy?.profile_pic
+                userData?.profile_pic
+                  ? userData?.profile_pic
                   : randomProfilePic
               }
               alt="ProfilePic"
             />
           </div>
-          <div className="singlePost-name-username-date">
-            <p className="name">{`${postData?.postedBy?.firstName} ${postData?.postedBy?.lastName}`}</p>
+          <div className="singlePost-name-username-date" onClick={()=>navigate(`/user/${postData.username}`)}>
+            <p className="name">{`${userData?.firstName} ${userData?.lastName}`}</p>
             <p className="username">@{`${postData?.username}`}</p>
           </div>
           <p className="date">{new Date(postData?.createdAt).toDateString()}</p>
@@ -140,22 +188,25 @@ const SinglePost = ({ postData }) => {
         </div>
         <div className="singlePost-btn-container">
           <div className="like-btn-container">
-            <button>
-              <AiOutlineHeart />
+            <button className="like"  onClick={()=> handleLikes(postData, token)} >
+              {
+                checkLikes(postData) ?  <AiFillHeart style={{color:"red"}} /> :<AiOutlineHeart className="open-heart"/> 
+              }
             </button>
+           
+              <span className="like-count">{postData?.likes?.likeCount === 0 ? "" : `${postData?.likes?.likeCount}`}</span>
+            
           </div>
-          <div className="comment-btn-container">
+          <div className="comment-btn-container"  >
             <button>
               <BiComment />
             </button>
           </div>
           <div className="bookmark-btn-container">
             <button onClick={()=>handleBookmark(postData._id, bookmarks, token)}>
-              
               { 
                 checkBookmark(postData._id, bookmarks) ? <BsBookmarkFill/> : <BsBookmark/>
-              }
-              
+              }   
             </button>
           </div>
           <div className="share-btn-container">

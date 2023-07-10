@@ -1,32 +1,30 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext,} from 'react'
+import { useNavigate } from 'react-router-dom';
 import {BiEditAlt} from "react-icons/bi";
 import {FiLogOut} from "react-icons/fi";
 import { DataContext } from '../../../context/DataContext';
 import "./profileComponent.scss";
 import {randomCoverPic, randomProfilePic} from "../../../resources/randomImages/RandomImages"
+import SinglePost from '../../common/singlePost/SinglePost';
 import { AuthContext } from '../../../context/AuthContext';
 
 
+
 const ProfileComponent = () => {
-
-    
-    const {allUsers} = useContext(DataContext);
+    const navigate = useNavigate();
+    const {logout} = useContext(AuthContext);
+    const {allUsers, currentuser, allPosts} = useContext(DataContext);
+    console.log("current user at profile",currentuser)
   
-    const {currentUser, setCurrentUser} = useContext(AuthContext);
-
-    
-    
-
-
-    // useEffect(()=>{
-    //   setCurrentUser(JSON.parse(localStorage.getItem('userData')))
-    // },[]);
-
+    const handleLogout = ()=>{
+      logout();
+      navigate('/');
+    }
   
-    const profile = currentUser;
-    console.log("profile", profile);
+    const profile = allUsers.find((user)=> user.username === currentuser.username);
 
-
+    const filteredPost = allPosts.filter((post)=> post.username === profile.username)
+    
     return (
     <div className='profile-container'>
       <div className="cover-photo">
@@ -39,7 +37,7 @@ const ProfileComponent = () => {
 
         <div className="profile-edit">
           <button ><BiEditAlt/> Profile</button>
-          <button  ><FiLogOut/></button>
+          <button onClick={handleLogout}  ><FiLogOut/></button>
         </div>
       </div>
       <div className="profile-details">
@@ -55,6 +53,16 @@ const ProfileComponent = () => {
           <button>{`${profile?.following?.length} following`}</button>
           <button>{`${profile?.followers?.length} followers`}</button>
         </div>
+      </div>
+
+      
+
+      <div className="profile-posts-container">
+        {
+          filteredPost?.length === 0 ? <div className="profile-header"><h1>No Post to show</h1></div> :
+          filteredPost?.map((postData)=>( 
+            <SinglePost postData={postData}/>))
+        }
       </div>
 
       

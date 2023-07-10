@@ -1,41 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./createPost.scss";
 import ModalComponent from "../modal/ModalComponent";
+import {AiOutlinePlusCircle} from "react-icons/ai";
+import { DataContext } from "../../../context/DataContext";
+
 
 const CreatePost = () => {
-  const [allPosts, setAllPosts] = useState([]);
-  const [post, setPost] = useState("");
+  
+  const [postInput, setPostInput] = useState({
+    content:"",
+    pic:"",
+  });
+
   const [modalOpen, setModalOpen] = useState(false);
-
-  const userData = JSON.parse(localStorage.getItem("userData"));
- 
-
+  const {currentuser} = useContext(DataContext)
+  
   return (
     <div className="create-post-container">
       <div className="post-profile-container">
         <div className="profile-img">
-          <img src={userData.profile_pic} alt="profile" />
+          <img src={currentuser?.profile_pic} alt="profile" />
         </div>
       </div>
       <div className="create-post-section">
         <div className="create-post">
           <button className="post-status-btn" onClick={()=> setModalOpen(true)}>Write something interesting...</button>
-          <div>
+          <span className="plus-btn"><AiOutlinePlusCircle/></span>
+          <div className="modal">
             <ModalComponent
               modalOpen={modalOpen}
               setModalOpen={setModalOpen}
-              post={post}
-              setPost={setPost}
-              //sendStatus={sendStatus}
+              postInput={postInput}
+              setPostInput={setPostInput}
             />
-          </div>
-        </div>
-        <div className="emoji-post-container">
-          <div className="image-emoji">
-            <button>😊</button>
-          </div>
-          <div className="post-status">
-            <button className="post-btn">POST</button>
           </div>
         </div>
       </div>

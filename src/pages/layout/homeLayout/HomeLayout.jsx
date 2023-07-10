@@ -16,6 +16,10 @@ const HomeLayout = () => {
             getAllBookmarks();
     },[]);
 
+    // const{allUsers} = useContext(DataContext);
+
+    // console.log("allUsers home layout",allUsers);
+
   return (
     <div className='homeLayout'>
       

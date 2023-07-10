@@ -1,6 +1,6 @@
-import {useEffect, useContext,useReducer, createContext, useState } from "react";
+import {useReducer, createContext, useState } from "react";
 import axios from "axios";
-
+import {toast} from "react-toastify";
 import { dataReducer } from "../reducers/DataReducer";
 
 
@@ -14,6 +14,7 @@ export const DataProvider = ({children})=>{
         bookmarks: [],
         currentuser:{},
         followedUser:[],
+        postData:{},
     }
     const [state, dispatch] = useReducer(dataReducer, initialValues);
     const encodedToken = (localStorage.getItem('encodedToken'));
@@ -72,6 +73,24 @@ export const DataProvider = ({children})=>{
         }
     }
 
+    const createPost = async (postData) => {
+        try {
+            const response = await fetch(`/api/posts`, {
+                method: 'POST',
+                headers: { authorization: encodedToken },
+                body: JSON.stringify(postData)
+            })
+            const responseData = (await response.json())?.posts
+            dispatch({
+                type:"AllPost",
+                payload:responseData,
+            })
+            toast.success(`Posted successfully`);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 
 
     // useEffect(()=>{
@@ -96,6 +115,7 @@ export const DataProvider = ({children})=>{
             getCurrentUser,
             getAllPosts,
             getAllBookmarks,
+            createPost,
         }}>
             {children}
         </DataContext.Provider>

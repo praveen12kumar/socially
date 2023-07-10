@@ -50,13 +50,6 @@ import { formatDate } from "../utils/authUtils";
       bio: "Software Developer",
       followers: [
         {
-          _id: "2",
-          firstName: "Rahul",
-          lastName: "Mallick",
-          username: "mallick",
-          profile_pic: "https://staticg.sportskeeda.com/editor/2022/07/c2ed4-16587439752781.png",
-        },
-        {
           _id: "3",
           firstName: "Ayush",
           lastName: "Singh",
@@ -65,20 +58,8 @@ import { formatDate } from "../utils/authUtils";
         }
       ],
       following: [
-        {
-          _id: "2",
-          firstName: "Rahul",
-          lastName: "Mallick",
-          username: "mallick",
-          profile_pic: "https://staticg.sportskeeda.com/editor/2022/07/c2ed4-16587439752781.png",
-        },
-        {
-          _id: "3",
-          firstName: "Ayush",
-          lastName: "Singh",
-          username: "ayush",
-          profile_pic: "https://res.cloudinary.com/randomwave45/image/upload/v1650022196/one_piece_1_anib9s.jpg",
-        }
+       
+
       ],
       bookmarks: [],
       id: "1"
@@ -96,26 +77,8 @@ import { formatDate } from "../utils/authUtils";
       cover_pic: "",
       link: "https://mallickrahul.netlify.app",
       bio: "Singer",
-      followers: [
-        {
-          _id: "1",
-          firstName: "Praveen",
-          lastName: "Kumar",
-          username: "praveenkumar",
-          profile_pic: "https://pbs.twimg.com/profile_images/1266934374060052480/O3nYz9s-_400x400.jpg",
-        },
-        
-      ],
-      following: [
-        {
-          _id: "1",
-          firstName: "Praveen",
-          lastName: "Kumar",
-          username: "praveenkumar",
-          profile_pic: "https://pbs.twimg.com/profile_images/1266934374060052480/O3nYz9s-_400x400.jpg",
-        },
-        
-      ],
+      followers: [],
+      following: [],
       bookmarks: [],
     },
     {
@@ -131,24 +94,8 @@ import { formatDate } from "../utils/authUtils";
       cover_pic: "",
       link: "https://singhayush.netlify.app",
       bio: "Automotive Designer",
-      followers: [
-        {
-          _id: "1",
-          firstName: "Praveen",
-          lastName: "Kumar",
-          username: "praveenkumar",
-          profile_pic: "https://pbs.twimg.com/profile_images/1266934374060052480/O3nYz9s-_400x400.jpg",
-        }
-      ],
-      following: [
-        {
-          _id: "1",
-          firstName: "Praveen",
-          lastName: "Kumar",
-          username: "praveenkumar",
-          profile_pic: "https://pbs.twimg.com/profile_images/1266934374060052480/O3nYz9s-_400x400.jpg",
-        },
-      ],
+      followers: [],
+      following: [],
       bookmarks: [],
     },
   

@@ -8,9 +8,9 @@ import Topbar from '../components/Topbar/Topbar'
 
 const Bookmark = () => {
   
-  const {bookmarks} = useContext(DataContext);
+  const {bookmarks, allPosts} = useContext(DataContext);
 
-  console.log(bookmarks);
+  const filteredData = allPosts.filter((post)=> (bookmarks.some((bukmrk)=>bukmrk._id === post._id)));
   
   return (
     <>
@@ -27,7 +27,7 @@ const Bookmark = () => {
         :
           <div className="bookmark-main-container">
             {
-              bookmarks?.map((postData)=> <SinglePost postData={postData} key={postData._id} />)
+              filteredData?.map((postData)=> <SinglePost postData={postData} key={postData._id} />)
             }
           </div>
 

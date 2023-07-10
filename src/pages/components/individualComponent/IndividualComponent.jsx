@@ -8,22 +8,56 @@ import {
   randomCoverPic,
   randomProfilePic,
 } from "../../../resources/randomImages/RandomImages";
+import SinglePost from "../../common/singlePost/SinglePost";
+import { toast } from "react-toastify";
+import axios from "axios";
+
 
 const IndividualComponent = () => {
+  const token = (localStorage.getItem('encodedToken'));
   const { username } = useParams();
-  const { allUsers, currentuser } = useContext(DataContext);
+  const { allUsers, allPosts, dataDispatch, currentuser } = useContext(DataContext);
 
-  const profile = allUsers?.filter((user) => user.username === username)[0];
+  const profile = allUsers?.find((user) => user.username === username);
+  console.log(profile);
+  const filteredPost = allPosts.filter((post)=> post.username === username)
+    
 
-  const unfollowHandler = ()=>{
+  const unfollowHandler = async(profile_id, token)=>{
+    try{
+      const {data:{user, followUser}, status} = await axios.post(`/api/users/unfollow/${profile_id}`,{}, {headers:{authorization:token}})
+      console.log("unfollow user: ", user, followUser);
+      toast.warn("user unfollowed");
+      dataDispatch({
+        type:"update_follow_user",
+        payload:{user, followUser},
+      })
+
+    }
+    catch(err){
+      console.log(err);
+    }
+
 
   }
-  const followHandler = ()=>{
-
+  const followHandler = async(profile_id, token)=>{
+    try{
+      const {data:{user, followUser}, status} = await axios.post(`/api/users/follow/${profile_id}`, {}, {headers:{authorization: 'token'}})
+      toast.success("user followed");
+      dataDispatch({
+        type:"update_follow_user",
+        payload:{user, followUser},
+      })
+    
+    }
+    catch(err){
+      console.log(err);
+    }
   }
 
+  console.log("updated profile", profile);
   return (
-    <div className="profile-container">
+    <div className="individual-container">
       <div className="cover-photo">
         <img
           src={
@@ -32,7 +66,7 @@ const IndividualComponent = () => {
           alt="cover photo"
         />
       </div>
-      <div className="profile-image-edit">
+      <div className="individual-image-edit">
         <div className="profile-image">
           <img
             src={
@@ -44,25 +78,25 @@ const IndividualComponent = () => {
           />
         </div>
         {/* follow unfollow btn section */}
-        <div className="profile-edit">
-          {profile?.following.find((user) => user?._id === profile._id) ? (
+        <div className="individual-edit-btn">
+          {profile?.followers.find((user) => user?._id === currentuser?._id) ? (
             <button
               className="unfollow-follow"
-              onClick={() => unfollowHandler(profile)}
+              onClick={() => unfollowHandler(profile?._id, token)}
             >
               <span className="text">Unfollow</span>
             </button>
           ) : (
             <button
               className="unfollow-follow"
-              onClick={() => followHandler(profile)}
+              onClick={() => followHandler(profile?._id, token)}
             >
               <span className="text">Follow</span>
             </button>
           )}
         </div>
       </div>
-      <div className="profile-details">
+      <div className="individual-details">
         <div className="name-username-email">
           <p className="name">{`${profile?.firstName} ${profile?.lastName}`}</p>
           <p className="profile-username">{`@${profile?.username}`}</p>
@@ -80,6 +114,15 @@ const IndividualComponent = () => {
           <button>{`${profile?.following?.length} following`}</button>
           <button>{`${profile?.followers?.length} followers`}</button>
         </div>
+      </div>
+
+      <div className="individual-posts-container">
+        {
+          filteredPost?.length === 0 ? <div className="individual-header"><h1>No Post to show</h1></div> :
+          filteredPost?.map((postData)=>( 
+            <SinglePost postData={postData}/>))
+
+        }
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 
 .create-post-container{
     width: 100%;
-    height: 200px;
+    height: 100px;
     padding: 1rem;
     display: flex;
     background-color: $white-color;
@@ -23,14 +23,10 @@
     >.create-post-section{
         width: 90%;
         height: 100%;
-        display: flex;
-        flex-direction: column;
-       
         >.create-post{
             width: 100%;
             height: 60%;
-            display: flex;
-            align-items: center;
+            position: relative;
             background-color: $secondary-color;
             >.post-status-btn{
                 width: 100%;
@@ -41,8 +37,14 @@
                 padding-left: 10px;
                 font-size: 14px;
                 color: $grey-color;
-                font-family: Roboto;
-                
+                font-family: Roboto;  
+            }
+            >.plus-btn{
+                font-size: 20px;
+                color: $grey-color;
+                position: absolute;
+                right: 10px;
+                top: 10px;
             }
         }
         >.emoji-post-container{

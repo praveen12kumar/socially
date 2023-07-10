@@ -6,8 +6,10 @@ import { DataContext } from "../../../context/DataContext";
 import "./rightDiv.scss";
 
 const RightDiv = () => {
-  const {allUsers} = useContext(DataContext);
-  const userData = JSON.parse( localStorage.getItem("userData"));
+  const {allUsers, currentuser} = useContext(DataContext);
+  
+  
+  
   
   const [searched, setSearched] = useState("");
   return (
@@ -28,9 +30,9 @@ const RightDiv = () => {
         <p className="show_more">Show More</p>
       </div>
       <div className="suggestion_main">
-        {allUsers?.filter((item)=>item.username !== userData.username).map((user) => (
-          <SuggestionCard user={user}  key={user.id}/>
-        ))}
+      {allUsers?.filter((user)=>user.username!==currentuser.username)?.
+          filter((user)=>!allUsers?.find((curr)=>curr.username===currentuser.username)?.following?.map((usr)=>usr.username)?.includes(user.username))?.
+          map((user)=><SuggestionCard user={user} key={user._id}/>)}
       </div>
     </div>
   );

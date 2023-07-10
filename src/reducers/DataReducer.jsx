@@ -13,8 +13,10 @@ export const dataReducer = (state, {type, payload})=>{
             return{...state, bookmarks:[...payload]};
         case "getNewBookmarks":
             return{...state, bookmarks:[...payload]};
-        
-
+        case "update_follow_user":   
+            let tempusers = [...state.allUsers];
+                tempusers = tempusers.filter((temp)=> temp.username !== payload.user.username && temp.username !== payload.followUser.username)
+            return{...state, allUsers:[...tempusers, payload.user, payload.followUser]}
 
         default: 
             return{state}

@@ -134,6 +134,7 @@ export const editPostHandler = function (schema, request) {
         }
       );
     }
+    
     post = { ...post, ...postData };
     this.db.posts.update({ _id: postId }, post);
     return new Response(201, {}, { posts: this.db.posts });
@@ -154,6 +155,7 @@ export const editPostHandler = function (schema, request) {
  * */
 
 export const likePostHandler = function (schema, request) {
+  
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -200,6 +202,7 @@ export const likePostHandler = function (schema, request) {
  * */
 
 export const dislikePostHandler = function (schema, request) {
+  
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
