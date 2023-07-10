@@ -78,9 +78,6 @@ const LeftDiv = () => {
             Profile
           </span>
         </div>
-        <div className="create-post">
-          <button className="btn">Create New Post</button>
-        </div>
         <div className="logout-section">
           <button className="logout-btn" onClick={handleLogout}>
             Logout

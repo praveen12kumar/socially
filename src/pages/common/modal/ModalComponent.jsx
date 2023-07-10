@@ -1,4 +1,4 @@
-import React,{useContext, useState} from 'react'
+import React,{useContext} from 'react'
 import { Button, Modal } from 'antd';
 import { DataContext } from '../../../context/DataContext';
 import {randomProfilePic} from "../../../resources/randomImages/RandomImages"
@@ -56,20 +56,17 @@ const ModalComponent = ({modalOpen, setModalOpen,postInput, setPostInput}) => {
     }
 
     try{
-      const {data:{posts},status} = await axios.post(`/api/posts/`, {postData:{...postData}}, {headers:{authorization:token}});
+      const {data:{posts}} = await axios.post(`/api/posts/`, {postData:{...postData}}, {headers:{authorization:token}});
       console.log("updated post data:", posts);
       dataDispatch({
         type: "AllPosts",
         payload: posts,
       })
+      toast.success("Post added successfully")
     }
     catch(error){
       console.error(error)
     }
-
-    
-
-    console.log("clicked");   
     setModalOpen(false)
    }
   
@@ -97,7 +94,7 @@ const ModalComponent = ({modalOpen, setModalOpen,postInput, setPostInput}) => {
           <Button 
             key="submit" 
             type="primary" 
-            disabled={postInput.content.length > 0 ? false : true} 
+            disabled={postInput?.content.length > 0 ? false : true} 
             onClick={()=>sendStatus(postInput, token)}
             >
             Post
@@ -120,7 +117,7 @@ const ModalComponent = ({modalOpen, setModalOpen,postInput, setPostInput}) => {
               onChange={(e)=> setPostInput((prev)=>({
                 ...prev, content: e.target.value}))
               }
-              value={postInput.content}/> 
+              value={postInput?.content}/> 
             </div>
           </div>
           {/* add a div for image preview */}

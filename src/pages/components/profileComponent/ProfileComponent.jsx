@@ -1,4 +1,4 @@
-import React, {useContext,} from 'react'
+import React, {useContext,useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import {BiEditAlt} from "react-icons/bi";
 import {FiLogOut} from "react-icons/fi";
@@ -7,23 +7,44 @@ import "./profileComponent.scss";
 import {randomCoverPic, randomProfilePic} from "../../../resources/randomImages/RandomImages"
 import SinglePost from '../../common/singlePost/SinglePost';
 import { AuthContext } from '../../../context/AuthContext';
-
+import ProfileModalComponent from './modalComponent/ModalComponent';
 
 
 const ProfileComponent = () => {
     const navigate = useNavigate();
     const {logout} = useContext(AuthContext);
     const {allUsers, currentuser, allPosts} = useContext(DataContext);
-    console.log("current user at profile",currentuser)
+    
+
+    const [profileModalOpen, setProfileModalOpen] = useState(false);
+    const profile = allUsers?.find((user)=> user.username === currentuser.username);
   
+
+    const [editedUserData, setEditedUserData] = useState({
+      cover_pic: profile?.cover_pic,
+      profile_pic: profile?.profile_pic,
+      firstName: profile?.firstName,
+      lastName: profile?.lastName,
+      user_email: profile?.user_email,
+      bio: profile?.bio,
+      link: profile?.link,
+    });
+
     const handleLogout = ()=>{
       logout();
       navigate('/');
     }
   
-    const profile = allUsers.find((user)=> user.username === currentuser.username);
+    
 
-    const filteredPost = allPosts.filter((post)=> post.username === profile.username)
+    let filteredPost = allPosts?.filter((post)=> post.username === profile.username)
+    filteredPost =   filteredPost?.sort((a, b) => {
+                        let da = new Date(a.createdAt),
+                            db = new Date(b.createdAt);
+                            return db - da;
+  })
+
+  console.log("filteredPost", filteredPost)
     
     return (
     <div className='profile-container'>
@@ -36,8 +57,17 @@ const ProfileComponent = () => {
         </div>
 
         <div className="profile-edit">
-          <button ><BiEditAlt/> Profile</button>
-          <button onClick={handleLogout}  ><FiLogOut/></button>
+          <button onClick={()=> setProfileModalOpen(true)} ><BiEditAlt/> Profile</button>
+          <button onClick={handleLogout}><FiLogOut/></button>
+          {/* Edit profile component */}
+          <div className="modal">
+            <ProfileModalComponent
+              profileModalOpen={profileModalOpen}
+              setProfileModalOpen={setProfileModalOpen}
+              editedUserData = {editedUserData}
+              setEditedUserData = {setEditedUserData}
+            />
+          </div>
         </div>
       </div>
       <div className="profile-details">
@@ -46,8 +76,7 @@ const ProfileComponent = () => {
           <p className='profile-username'>{`@${profile?.username}`}</p>
           <a className='email' href={`mailto:${profile?.user_email}`}>Email:{profile?.user_email}</a>
           <p className='bio'>{profile?.bio}</p>
-          {profile?.link && <a href={profile?.link} className='website' target='_'>{profile?.link?.slice(8)} </a>
-          }
+          {profile?.link && <a href={profile?.link} className='website' target='_'>{profile?.link?.slice(8)} </a>}
         </div>
         <div className="follow-unfollow">
           <button>{`${profile?.following?.length} following`}</button>
@@ -55,7 +84,7 @@ const ProfileComponent = () => {
         </div>
       </div>
 
-      
+
 
       <div className="profile-posts-container">
         {

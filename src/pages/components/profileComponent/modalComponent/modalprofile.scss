@@ -1,0 +1,185 @@
+@import "../../../../style/utils.scss";
+
+.edit-container{
+    width: 480px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    align-items: center;
+    position: relative;
+    background-color: $background;
+    >.cover-image-container{
+        width: 100%;
+        height: 200px;
+        position: relative;
+        
+        >img{
+            width: 100%;
+            height: 100%;
+        }
+        >.select-cover-container{
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 100px;
+            left: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            >.image-btn{
+                color: #fff;
+                font-size: 20px;
+                padding-top: 5px;
+            }
+        }   
+    }
+    >.profile-image-container{
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        left: 30px;
+        top: 150px;
+        z-index: 10;
+        >.profile-image{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        } 
+        >.select-profile-container{
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            >.image-btn{
+                color: #fff;
+                font-size: 20px;
+                padding-top: 5px;
+            }
+        } 
+    }
+    >.profile-details-container{
+        width: 100%;
+        height: auto;
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        font-family: Roboto;
+        >.edit-user-fist-name{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            >.text{
+                width: 30%;
+                padding: 0.5rem 1rem;
+                font-size: 16px;
+            }
+            >.edit-first-name{
+                width: 70%;
+                padding: 0.5rem 1rem;
+                border: none;
+                outline: none;
+                border-radius: 3px;
+                font-weight: 500;
+                font-size: 16px;
+                
+            }
+        }
+        >.edit-user-last-name{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            >.text{
+                width: 30%;
+                padding: 0.5rem 1rem;
+                font-size: 16px;
+            }
+            >.edit-last-name{
+                width: 70%;
+                padding: 0.5rem 1rem;
+                border: none;
+                outline: none;
+                border-radius: 3px;
+                font-weight: 500;
+                font-size: 16px;
+            }
+        }
+        >.edit-user-email{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            >.text{
+                width: 30%;
+                padding: 0.5rem 1rem;
+                font-size: 16px;
+            }
+            >.edit-user-email{
+                width: 70%;
+                padding: 0.5rem 1rem;
+                border: none;
+                outline: none;
+                border-radius: 3px;
+                font-weight: 500;
+                font-size: 16px;
+            }
+        }
+        >.edit-user-bio{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            >.text{
+                width: 30%;
+                padding: 0.5rem 1rem;
+                font-size: 16px;
+            }
+            >.edit-user-bio{
+                width: 70%;
+                padding: 0.5rem 1rem;
+                border: none;
+                outline: none;
+                border-radius: 3px;
+                font-weight: 500;
+                font-size: 16px;
+            }
+        }
+        >.edit-user-website{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            >.text{
+                width: 30%;
+                padding: 0.5rem 1rem;
+                font-size: 16px;
+            }
+            >.edit-user-link{
+                width: 70%;
+                padding: 0.5rem 1rem;
+                border: none;
+                outline: none;
+                border-radius: 3px;
+                font-weight: 500;
+                font-size: 16px;
+            }
+        }
+    }
+}

@@ -7,6 +7,7 @@
     justify-content: center;
     background-color: $background;
     padding: 0rem 2rem;
+    position: relative;
     >.explore-main-container{
         width: 55%;
         height: 100%;
@@ -19,8 +20,6 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            
-            
                 >.search-container{
                     width: 50%;
                     height: 200px;
@@ -51,6 +50,26 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            >.explore-btns{
+                width: 100%;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+
+                >button{
+                    padding: 0.5rem 1rem;
+                    font-size: 18px;
+                    font-family: Roboto;
+                    color: #fff;
+                    background-color: $primary-color;
+                    margin-right: 1rem;
+                    border: none;
+                    border-radius: 5px;
+                    &:hover{
+                        background-color: $primary-color2;
+                    }
+                }
+            }
            } 
         }
 

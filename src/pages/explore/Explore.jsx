@@ -11,13 +11,43 @@ import {AiOutlineSearch} from "react-icons/ai";
 
 const Explore = () => {
 
-  const {allPosts} = useContext(DataContext);
+  const {allPosts, dataDispatch} = useContext(DataContext);
+  let filteredPosts = allPosts;
+  // console.log("filteredPosts",  filteredPosts);   
 
+  const handleLatestPosts = (e)=>{
+      e.preventDefault();
+       filteredPosts = allPosts?.sort((a, b) => {
+          let da = new Date(a.updatedAt),
+          db = new Date(b.updatedAt);
+          return db - da;
+      })
+
+      dataDispatch({
+        type:"AllPosts",
+        payload: filteredPosts,
+      })
+    }
+
+    const handleTrendingPosts = (e)=>{
+      e.preventDefault();
+      filteredPosts = allPosts?.sort((a, b)=>{
+        return  b?.likes?.likeCount - a?.likes?.likeCount
+      })
+
+      dataDispatch({
+        type:"AllPosts",
+        payload: filteredPosts,
+      })
+        
+    
+    console.log("handleTrendingPosts", filteredPosts);
+    }
 
   return (
     <>
       <Topbar/>
-      <div className="explore-container">
+      <div className="explore-container" >
         <LeftDiv/>
           <div className="explore-main-container">
             {
@@ -32,8 +62,12 @@ const Explore = () => {
                           
                   </div>
                   <div className="explore-posts">
+                  <div className="explore-btns">
+                    <button onClick={(e)=>handleTrendingPosts(e)} className='trend-btn'>Trending</button>
+                    <button onClick={(e)=>handleLatestPosts(e)} className='latest-btn'>Latest</button>
+                  </div>
                 {
-                  allPosts?.map((postData)=>(
+                  filteredPosts?.map((postData)=>(
                     <SinglePost postData = {postData} key={postData._id}/>
                   ))
                 }

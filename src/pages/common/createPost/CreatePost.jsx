@@ -3,6 +3,7 @@ import "./createPost.scss";
 import ModalComponent from "../modal/ModalComponent";
 import {AiOutlinePlusCircle} from "react-icons/ai";
 import { DataContext } from "../../../context/DataContext";
+import { randomProfilePic } from "../../../resources/randomImages/RandomImages";
 
 
 const CreatePost = () => {
@@ -19,7 +20,7 @@ const CreatePost = () => {
     <div className="create-post-container">
       <div className="post-profile-container">
         <div className="profile-img">
-          <img src={currentuser?.profile_pic} alt="profile" />
+          <img src={currentuser?.profile_pic ? currentuser?.profile_pic : randomProfilePic } alt="profile" />
         </div>
       </div>
       <div className="create-post-section">

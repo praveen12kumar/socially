@@ -14,22 +14,30 @@ import { DataContext } from "../../../context/DataContext";
 import {toast} from "react-toastify";
 import axios from "axios";
 
+
 const SinglePost = ({ postData }) => {
-
-  console.log("postData", postData);
-
-
   const token = (localStorage.getItem('encodedToken'));
   const navigate = useNavigate();
   const profileId = JSON.parse(localStorage.getItem("userData"))?._id;
   const [isThreDotsOpen, setIsThreDotsOpen] = useState(false);
-  const [isEditPostModal, setIsEditPostModal] = useState(false);
-  const {allUsers, bookmarks, dataDispatch, currentuser} = useContext(DataContext);
+ 
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const {allUsers, allPosts, bookmarks, dataDispatch, currentuser} = useContext(DataContext);
 
   const userData = allUsers?.find((user)=> user.username === postData.username);
-  console.log("userData", userData);
   
-  const deleteClickHandler = () => {};
+  
+  const deleteClickHandler = (postDataId) => {  
+     console.log("post id",postDataId);
+
+      const filteredPosts =  allPosts.filter((post)=> post._id !== postDataId)
+      dataDispatch({
+        type:"AllPosts",
+        payload: filteredPosts
+      })
+      toast.warn("Post deleted")
+  };
   
 // =========      bookmarks         =============================
 
@@ -164,17 +172,21 @@ const SinglePost = ({ postData }) => {
             )}
             {isThreDotsOpen && (
               <div className="threeDotsMenu">
-                <p className="option1" onClick={() => setIsEditPostModal(true)}>
+                <button className="option1" onClick={() => setModalOpen(true)}>
                   Edit
-                </p>
-                <p className="option2" onClick={() => deleteClickHandler}>
+                </button>
+                <button className="option2" onClick={() => deleteClickHandler(postData._id)}>
                   Delete
-                </p>
+                </button>
               </div>
+              
             )}
+            
           </div>
+          
         )}
       </div>
+      
       <div className="singlePost-body">
         <div className="content-pic">
           <p className="singlePost-content">{postData?.content}</p>

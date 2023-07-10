@@ -16,7 +16,13 @@ export const dataReducer = (state, {type, payload})=>{
         case "update_follow_user":   
             let tempusers = [...state.allUsers];
                 tempusers = tempusers.filter((temp)=> temp.username !== payload.user.username && temp.username !== payload.followUser.username)
-            return{...state, allUsers:[...tempusers, payload.user, payload.followUser]}
+            return{...state, allUsers:[...tempusers, payload.user, payload.followUser]};
+        case "update_user":
+            let tusers = [...state.allUsers];
+                tusers = tusers.filter((t)=> t.username !== payload.username);
+            return{...state, allUsers:[...tusers, payload]};
+               
+            
 
         default: 
             return{state}
