@@ -11,10 +11,9 @@ const Explore = () => {
 
   const {allPosts, dataDispatch, getAllPosts, searchPost} = useContext(DataContext);
   let filteredPosts = allPosts;
-  // console.log("filteredPosts",  filteredPosts);   
+  
 
-  console.log("searchPost", searchPost);
-
+  
   const handleLatestPosts = (e)=>{
       e.preventDefault();
        filteredPosts = allPosts?.sort((a, b) => {
@@ -47,8 +46,10 @@ const Explore = () => {
         payload: value,
       })
     }
-
-
+    
+   let filteredNewPost = searchPost ? filteredPosts?.filter((post)=> post.content.toLowerCase().includes(searchPost.toLowerCase())) : filteredPosts
+  
+     
     useEffect(()=>{
       getAllPosts();
     },[])
@@ -74,7 +75,7 @@ const Explore = () => {
                     <button onClick={(e)=>handleLatestPosts(e)} className='latest-btn'>Latest</button>
                   </div>
                 {
-                  filteredPosts?.map((postData)=>(
+                  filteredNewPost?.map((postData)=>(
                     <SinglePost postData = {postData} key={postData._id}/>
                   ))
                 }

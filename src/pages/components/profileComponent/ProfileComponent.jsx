@@ -91,7 +91,7 @@ const ProfileComponent = () => {
         {
           filteredPost?.length === 0 ? <div className="profile-header"><h1>No Post to show</h1></div> :
           filteredPost?.map((postData)=>( 
-            <SinglePost postData={postData}/>))
+            <SinglePost postData={postData} key={postData._id} />))
         }
       </div>
 

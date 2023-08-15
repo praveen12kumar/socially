@@ -4,7 +4,6 @@ export const dataReducer = (state, {type, payload})=>{
         case "AllUsers":
             return{...state, allUsers:[...payload]};
         case "AllPosts":
-            console.log("Delete Post", payload);
             return{...state, allPosts:[...payload]};
         case "currentUser":
             return{...state, currentuser:{...payload}};
@@ -25,6 +24,10 @@ export const dataReducer = (state, {type, payload})=>{
         case "postSearch":
             return{
                 ...state, searchPost:payload
+            }
+        case "searchUser":
+            return{
+                ...state, searchUser: payload,
             }
             
 

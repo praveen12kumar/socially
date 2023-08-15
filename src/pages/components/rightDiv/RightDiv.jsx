@@ -6,12 +6,20 @@ import { DataContext } from "../../../context/DataContext";
 import "./rightDiv.scss";
 
 const RightDiv = () => {
-  const {allUsers, currentuser} = useContext(DataContext);
+  const {allUsers, currentuser, searchUser, dataDispatch} = useContext(DataContext);
+
+  const handleUserSearch = (value) => {
+    console.log("searchUser", searchUser);
+    dataDispatch({
+      type:"searchUser",
+      payload: value,
+    })
+  }
+
+  const filteredUsers = allUsers?.filter((user)=> user.firstName.toLowerCase().includes(searchUser.toLowerCase()) || user.lastName.toLowerCase().includes(searchUser.toLowerCase()))
+
   
   
-  
-  
-  const [searched, setSearched] = useState("");
   return (
     <div className="suggestions-section">
       <div className="search-section">
@@ -21,8 +29,7 @@ const RightDiv = () => {
         <input
           type="text"
           placeholder="Search Posts, People, Anything..."
-          value={searched}
-          onChange={(e) => setSearched(e.target.value)}
+          onChange={(e) => handleUserSearch(e.target.value)} 
         />
       </div>
       <div className="who_follow">
@@ -30,7 +37,7 @@ const RightDiv = () => {
         <p className="show_more">Show More</p>
       </div>
       <div className="suggestion_main">
-      {allUsers?.filter((user)=>user.username!==currentuser.username)?.
+      {filteredUsers?.filter((user)=>user.username!==currentuser.username)?.
           filter((user)=>!allUsers?.find((curr)=>curr.username===currentuser.username)?.following?.map((usr)=>usr.username)?.includes(user.username))?.map((user)=><SuggestionCard user={user} key={user._id}/>)}
       </div>
     </div>
