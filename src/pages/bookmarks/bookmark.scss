@@ -2,7 +2,7 @@
 
 .bookmark-container{
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     background-color: $background;
@@ -10,7 +10,7 @@
 
     >.bookmark-section{
         width: 55%;
-
+        height: auto;
         >.bookmark-heading{
             display: flex;
             justify-content: center;

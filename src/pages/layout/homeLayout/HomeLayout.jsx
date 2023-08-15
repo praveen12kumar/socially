@@ -1,10 +1,9 @@
 import React, {useContext, useEffect} from 'react'
 import Home from '../../home/Home';
-import Topbar from '../../components/Topbar/Topbar';
 import { DataContext } from '../../../context/DataContext';
 const HomeLayout = () => {
     
-  const {state, getAllUsersHandler,
+  const {getAllUsersHandler,
     getCurrentUser,
     getAllPosts,
     getAllBookmarks,} = useContext(DataContext);
@@ -22,9 +21,7 @@ const HomeLayout = () => {
 
   return (
     <div className='homeLayout'>
-      
-        <Topbar/>
-        
+       
         <Home/>
         
     </div>

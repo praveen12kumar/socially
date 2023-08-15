@@ -46,6 +46,7 @@ const ModalComponent = ({modalOpen, setModalOpen,postInput, setPostInput}) => {
     
     const base64 = await convertBase64(file);
     setPostInput((prev)=>({...prev, pic:base64}))
+    
   }
 
   const sendStatus =  async(postInput, token)=>{

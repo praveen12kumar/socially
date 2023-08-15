@@ -1,11 +1,12 @@
 @import "../../../style/utils.scss";
 
 .create-post-container{
-    width: 100%;
+    width: 90%;
     height: 100px;
-    padding: 1rem;
+    padding: 1.5rem 1rem 1rem 1rem;
     display: flex;
     background-color: $white-color;
+    border-radius: 10px;
     >.post-profile-container{
         width: 10%;
         height: 100%;

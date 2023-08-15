@@ -1,5 +1,4 @@
 import React from 'react'
-import { useContext } from 'react';
 import "./home.scss";
 import LeftDiv from '../components/leftside/LeftDiv';
 import MainDiv from '../components/mainDiv/MainDiv';

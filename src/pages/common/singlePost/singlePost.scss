@@ -53,30 +53,65 @@
                 font-weight: 400;
             }
         }
-        >.three-dots-container{
-            width: 30px;
-            height: 30px;
-            padding-right: 60px;
-            >.dots-icons{
-                background: transparent;
-                border: none;
-                cursor: pointer;
-                font-size: 16px;
-                font-weight: 500;   
-            }
-            >.threeDotsMenu{
-                width: 60px;
-                height: 70px;
-                border-radius: 5px;
-                padding-left: 10px;
-                padding-top: 5px;
-                background-color: $white-color;
+        // >.three-dots-container{
+        //     width: 30px;
+        //     height: 30px;
+        //     padding-right: 60px;
+        //     >.dots-icons{
+        //         background: transparent;
+        //         border: none;
+        //         cursor: pointer;
+        //         font-size: 16px;
+        //         font-weight: 500;   
+        //     }
+        //     >.threeDotsMenu{
+        //         width: 60px;
+        //         height: 70px;
+        //         border-radius: 5px;
+        //         padding-left: 10px;
+        //         padding-top: 5px;
+        //         background-color: $white-color;
+        //         display: flex;
+        //         flex-direction: column;
+                
+        //         >.option{
+        //             width: 100%;
+        //             text-align: left;
+        //             background: transparent;
+        //             border: none;
+        //             font-family: Poppins;
+        //             font-size: 12px;
+        //             padding-bottom: 2px;
+        //             padding-left: 2px;
+        //             cursor: pointer;
+        //             border: 2px solid gray;
+        //             border-radius: 5px;
+        //             margin-bottom: 5px;
 
-                >p{
-                    font-family: Poppins;
-                    font-size: 15px;
-                    padding-bottom: 5px;
-                    cursor: pointer;
+
+        //         }
+        //     }
+        // }
+
+        >.updatePost{
+            margin-right: 20px;
+            margin-top: 10px;
+            >.editPost{
+                margin-right: 10px;
+                color: green;
+                font-size: 20px;
+                cursor: pointer;
+                &:hover{
+                   color: rgb(3, 78, 3);
+                }
+            }
+
+            >.deletePost{
+                color: rgb(205, 29, 29);
+                font-size: 20px;
+                cursor: pointer;
+                &:hover{
+                    color: rgb(147, 15, 15);
                 }
             }
         }

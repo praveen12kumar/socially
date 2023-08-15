@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { RequiresAuth } from "./requiresAuth/RequiresAuth";
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
+import Topbar from "./pages/components/Topbar/Topbar";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/register/Signup";
 import HomeLayout from "./pages/layout/homeLayout/HomeLayout";
@@ -33,6 +34,7 @@ function App() {
         theme="dark"
      />
 
+      <Topbar/>
      
       <Routes>
         <Route path="/" element={<RequiresAuth><HomeLayout/></RequiresAuth>}/>

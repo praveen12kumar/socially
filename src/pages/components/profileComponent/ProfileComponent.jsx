@@ -15,10 +15,11 @@ const ProfileComponent = () => {
     const {logout} = useContext(AuthContext);
     const {allUsers, currentuser, allPosts} = useContext(DataContext);
     
-
+  
     const [profileModalOpen, setProfileModalOpen] = useState(false);
     const profile = allUsers?.find((user)=> user.username === currentuser.username);
-  
+
+   
 
     const [editedUserData, setEditedUserData] = useState({
       cover_pic: profile?.cover_pic,
@@ -44,7 +45,7 @@ const ProfileComponent = () => {
                             return db - da;
   })
 
-  console.log("filteredPost", filteredPost)
+  
     
     return (
     <div className='profile-container'>

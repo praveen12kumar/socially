@@ -39,8 +39,6 @@ const LeftDiv = () => {
  
 }
 
-
-
   return (
     <div className="explore-section">
       <div className="explore-main">

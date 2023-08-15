@@ -1,4 +1,4 @@
-import {useReducer, createContext, useState } from "react";
+import {useReducer, createContext } from "react";
 import axios from "axios";
 import {toast} from "react-toastify";
 import { dataReducer } from "../reducers/DataReducer";
@@ -15,6 +15,8 @@ export const DataProvider = ({children})=>{
         currentuser:{},
         followedUser:[],
         postData:{},
+        searchPost:"",
+        searchUser:"",
     }
     const [state, dispatch] = useReducer(dataReducer, initialValues);
     const encodedToken = (localStorage.getItem('encodedToken'));
@@ -47,7 +49,6 @@ export const DataProvider = ({children})=>{
     const getCurrentUser = () => {
         try{
             const userData = JSON.parse(localStorage.getItem("userData"));
-            
             dispatch({
                 type:"currentUser",
                 payload:userData
@@ -93,12 +94,6 @@ export const DataProvider = ({children})=>{
 
 
 
-    // useEffect(()=>{
-    //     getAllUsersHandler();
-    //     getCurrentUser();
-    //     getAllPosts();
-    //     getAllBookmarks();
-    // },[]);
 
     
 
@@ -110,6 +105,8 @@ export const DataProvider = ({children})=>{
             bookmarks: state.bookmarks,
             currentuser: state.currentuser,
             followedUser: state.followedUser,
+            searchPost: state.searchPost,
+            searchUser: state.searchUser,
             dataDispatch: dispatch,
             getAllUsersHandler,
             getCurrentUser,

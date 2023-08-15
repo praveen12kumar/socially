@@ -31,8 +31,7 @@ const RightDiv = () => {
       </div>
       <div className="suggestion_main">
       {allUsers?.filter((user)=>user.username!==currentuser.username)?.
-          filter((user)=>!allUsers?.find((curr)=>curr.username===currentuser.username)?.following?.map((usr)=>usr.username)?.includes(user.username))?.
-          map((user)=><SuggestionCard user={user} key={user._id}/>)}
+          filter((user)=>!allUsers?.find((curr)=>curr.username===currentuser.username)?.following?.map((usr)=>usr.username)?.includes(user.username))?.map((user)=><SuggestionCard user={user} key={user._id}/>)}
       </div>
     </div>
   );

@@ -16,6 +16,7 @@ const CreatePost = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const {currentuser} = useContext(DataContext)
   
+  
   return (
     <div className="create-post-container">
       <div className="post-profile-container">

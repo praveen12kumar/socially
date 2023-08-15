@@ -1,7 +1,5 @@
-import React,{useContext} from 'react'
-import { Link } from 'react-router-dom';
+import React,{useContext, useEffect} from 'react'
 import "./explore.scss";
-import Topbar from '../components/Topbar/Topbar';
 import LeftDiv from '../components/leftside/LeftDiv';
 import RightDiv from "../components/rightDiv/RightDiv";
 import { DataContext } from '../../context/DataContext';
@@ -11,9 +9,11 @@ import {AiOutlineSearch} from "react-icons/ai";
 
 const Explore = () => {
 
-  const {allPosts, dataDispatch} = useContext(DataContext);
+  const {allPosts, dataDispatch, getAllPosts, searchPost} = useContext(DataContext);
   let filteredPosts = allPosts;
   // console.log("filteredPosts",  filteredPosts);   
+
+  console.log("searchPost", searchPost);
 
   const handleLatestPosts = (e)=>{
       e.preventDefault();
@@ -39,14 +39,21 @@ const Explore = () => {
         type:"AllPosts",
         payload: filteredPosts,
       })
-        
-    
-    console.log("handleTrendingPosts", filteredPosts);
+    };
+
+    const handlePostSearch = (value)=>{
+      dataDispatch({
+        type:"postSearch",
+        payload: value,
+      })
     }
 
+
+    useEffect(()=>{
+      getAllPosts();
+    },[])
+
   return (
-    <>
-      <Topbar/>
       <div className="explore-container" >
         <LeftDiv/>
           <div className="explore-main-container">
@@ -58,7 +65,7 @@ const Explore = () => {
                   <div className="search-container">
                           
                             <span className="search-icon"><AiOutlineSearch/></span>
-                            <input className='explore-search-input' type="text" placeholder='Search...' />
+                            <input className='explore-search-input' type="text" placeholder='Search...' onChange={(event)=> handlePostSearch(event.target.value)} />
                           
                   </div>
                   <div className="explore-posts">
@@ -78,7 +85,6 @@ const Explore = () => {
           </div>
         <RightDiv/>
       </div>
-    </>
   )
 }
 

@@ -4,6 +4,7 @@ export const dataReducer = (state, {type, payload})=>{
         case "AllUsers":
             return{...state, allUsers:[...payload]};
         case "AllPosts":
+            console.log("Delete Post", payload);
             return{...state, allPosts:[...payload]};
         case "currentUser":
             return{...state, currentuser:{...payload}};
@@ -21,7 +22,10 @@ export const dataReducer = (state, {type, payload})=>{
             let tusers = [...state.allUsers];
                 tusers = tusers.filter((t)=> t.username !== payload.username);
             return{...state, allUsers:[...tusers, payload]};
-               
+        case "postSearch":
+            return{
+                ...state, searchPost:payload
+            }
             
 
         default: 

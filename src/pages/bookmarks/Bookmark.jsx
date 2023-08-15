@@ -4,7 +4,7 @@ import { DataContext } from '../../context/DataContext'
 import SinglePost from '../common/singlePost/SinglePost'
 import LeftDiv from '../components/leftside/LeftDiv'
 import RightDiv from '../components/rightDiv/RightDiv'
-import Topbar from '../components/Topbar/Topbar'
+
 
 const Bookmark = () => {
   
@@ -13,8 +13,6 @@ const Bookmark = () => {
   const filteredData = allPosts.filter((post)=> (bookmarks.some((bukmrk)=>bukmrk._id === post._id)));
   
   return (
-    <>
-    <Topbar/>
     <div className='bookmark-container'>
       <LeftDiv/>
       <div className="bookmark-section">
@@ -35,8 +33,6 @@ const Bookmark = () => {
       </div>
       <RightDiv/>
     </div>
-    
-    </>
   )
 }
 
