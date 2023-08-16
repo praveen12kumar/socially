@@ -51,6 +51,8 @@ const ModalComponent = ({modalOpen, setModalOpen,postInput, setPostInput}) => {
 
   const sendStatus =  async(postInput, token)=>{
     //e.preventDefault();
+    
+    
     const postData = {
       ...postInput,
       userId: currentuser?._id
@@ -58,7 +60,6 @@ const ModalComponent = ({modalOpen, setModalOpen,postInput, setPostInput}) => {
 
     try{
       const {data:{posts}} = await axios.post(`/api/posts/`, {postData:{...postData}}, {headers:{authorization:token}});
-      console.log("updated post data:", posts);
       dataDispatch({
         type: "AllPosts",
         payload: posts,
@@ -126,6 +127,9 @@ const ModalComponent = ({modalOpen, setModalOpen,postInput, setPostInput}) => {
             <img className='modal-image' style={{width:"130px", height:"90px"}} src={postInput.pic} alt="Post image" />
             <span className='modal-image-cancel'>{<MdOutlineCancel onClick={()=> setPostInput((prev)=> ({...prev, pic:""}))}/>}</span>
           </div>}
+            
+
+
         </div>
       </Modal>
     </div>

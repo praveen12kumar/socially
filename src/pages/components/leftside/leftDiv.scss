@@ -16,7 +16,7 @@
     padding-left: 3rem;
     cursor: pointer;
     > .home-icon {
-      margin: 4px 0px;
+      margin: 10px 0px;
       > span {
         font-size: 1.1rem;
         font-family: Poppins;
@@ -25,7 +25,7 @@
       }
     }
     > .explore {
-      margin: 4px 0px;
+      margin: 10px 0px;
       > span {
         font-size: 1.1rem;
         font-family: Poppins;
@@ -34,7 +34,7 @@
       }
     }
     > .bookmark {
-      margin: 4px 0px;
+      margin: 10px 0px;
       > span {
         font-size: 1.1rem;
         font-family: Poppins;
@@ -43,7 +43,7 @@
       }
     }
     > .profile {
-      margin: 4px 0px;
+      margin: 10px 0px;
       > span {
         font-size: 1.1rem;
         font-family: Poppins;
@@ -58,7 +58,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 1rem;
+      margin-top: 2rem;
 
       > .btn {
         width: 100%;
@@ -69,6 +69,7 @@
         border-radius: 3px;
         font-size: 14px;
         letter-spacing: 2px;
+
       }
     }
     > .logout-section {
@@ -77,7 +78,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 1rem;
+      margin-top: 2rem;
 
       > .logout-btn {
         width: 100%;

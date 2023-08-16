@@ -135,6 +135,9 @@ const ProfileComponent = () => {
               <div className="follow-main">
                 <button className='cancelOpenFollow' onClick={()=> setOpenFollow("")}><AiOutlineClose/> </button>
                 {
+                  profile?.following.length ===  0 ? <div className="nofollowing">
+                    <p>You don't follow anyone</p>
+                  </div> :
                   profile?.following?.map((following)=>(
                     <div className="follower-div" key={following._id}>
                       {console.log("following",following)}

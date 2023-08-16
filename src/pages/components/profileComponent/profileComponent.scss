@@ -154,6 +154,17 @@
                         left: 10px;
                         cursor: pointer;
                     }
+                    >.nofollowing{
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        margin-top: 6rem;
+                        justify-content: center;
+                        >p{
+                            font-size: 24px;
+                            font-weight: 600;
+                        }
+                    }
                     >.follower-div{
                         width: 100%;
                         height: 70px;

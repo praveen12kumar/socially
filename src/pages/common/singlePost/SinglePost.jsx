@@ -2,18 +2,16 @@ import React, { useState, useContext } from "react";
 import {
   AiOutlineHeart,
   AiOutlineShareAlt,
-  
   AiFillHeart,
   AiFillEdit,
   AiFillDelete,
 } from "react-icons/ai";
+import {BsImageFill} from "react-icons/bs";
 import { BiComment } from "react-icons/bi";
-import {
-  BsBookmark,
-  BsBookmarkFill,
-} from "react-icons/bs";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { TfiClose } from "react-icons/tfi";
+import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-
 
 import "./singlePost.scss";
 import { randomProfilePic } from "../../../resources/randomImages/RandomImages";
@@ -25,9 +23,10 @@ const SinglePost = ({ postData }) => {
   const token = localStorage.getItem("encodedToken");
   const navigate = useNavigate();
 
+  const [editmodalOpen, setEditModalOpen] = useState(false);
 
-  //const [modalOpen, setModalOpen] = useState(false);
-
+  const [editedData, setEditedData] = useState(postData);
+  
   const { allUsers, allPosts, bookmarks, dataDispatch, currentuser } =
     useContext(DataContext);
 
@@ -45,8 +44,26 @@ const SinglePost = ({ postData }) => {
     toast.warn("Post deleted");
   };
 
-  const handleEditPost = () => {
-    console.log("edit clicked");
+  const handleEditPost = async (editedData) => {
+    const postData = {
+      content: editedData.content,
+      pic: editedData.pic,
+      userId: currentuser?._id
+    }
+
+    try{
+      const {data:{posts}} = await axios.post(`/api/posts/edit/:${editedData._id}`, {postData:{...postData}}, {headers:{authorization:token}});
+      console.log('posts after edit', posts);
+      dataDispatch({
+        type: "AllPosts",
+        payload: posts,
+      })
+      toast.success("Post added successfully")
+    }
+    catch(error){
+      console.error(error)
+    }
+    setEditModalOpen(false)
   };
 
   // =========      bookmarks         =============================
@@ -157,7 +174,29 @@ const SinglePost = ({ postData }) => {
       : addLike(postData._id, token);
   };
 
- 
+  const convertBase64 = (file)=>{
+
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () =>{
+        resolve(fileReader.result);
+      }
+      fileReader.onerror = (error) =>{
+        reject(error)
+      };
+    })
+  }
+
+  const handleUpload =async(event) => {
+    const file = event.target.files[0];
+    
+    const base64 = await convertBase64(file);
+    setEditedData((prev)=>({...prev, pic:base64}))
+    console.log("edited final data", editedData);
+  }
+
+  
 
   return (
     <div className="singlePost-container">
@@ -186,10 +225,107 @@ const SinglePost = ({ postData }) => {
           <p className="date">{new Date(postData?.createdAt).toDateString()}</p>
         </div>
 
+              {/* // edit post  */}
+
         {postData?.username === currentuser?.username && (
           <div className="updatePost">
-            <AiFillEdit className="editPost" onClick={handleEditPost}  />
-            <AiFillDelete className="deletePost" onClick={(e)=> deleteClickHandler(e, postData._id)} />
+            <AiFillEdit
+              className="editPost"
+              onClick={() => setEditModalOpen(!editmodalOpen)}
+            />
+
+            {editmodalOpen && (
+              <div className="edit-post-modal-container">
+                <div className="edit-post-container">
+                  <button
+                    className="close-btn"
+                    onClick={() => setEditModalOpen(!editmodalOpen)}
+                  >
+                    <TfiClose />
+                  </button>
+                  <div className="image-and-text">
+                    <div className="profile-pic-container">
+                      <img
+                        src={
+                          editedData?.profile_pic
+                            ? editedData?.profile_pic
+                            : postData?.postedBy?.profile_pic?.length > 0
+                            ? postData?.postedBy?.profile_pic
+                            : randomProfilePic
+                        }
+                        alt="profile"
+                        className="profile-pic"
+                      />
+                    </div>
+                    <textarea
+                      name=""
+                      id=""
+                      cols="50"
+                      rows="6"
+                      className="post-textarea"
+                      placeholder="What's happening?!"
+                      defaultValue={editedData?.content}
+                      onChange={(event) =>
+                        setEditedData({
+                          ...editedData,
+                          content: event.target.value,
+                        })
+                      }
+                    ></textarea>
+                  </div>
+                  {editedData.pic && (
+                    <div className="modal-image-container">
+                      <img
+                        className="modal-image"
+                        style={{
+                          width: "180px",
+                          height: "120px",
+                          borderRadius: "10px",
+                        }}
+                        src={editedData.pic}
+                        alt="Post image"
+                      />
+                      <span className="modal-image-cancel">
+                        {
+                          <MdOutlineCancel
+                            onClick={() =>
+                              setEditedData((prev) => ({ ...prev, pic: "" }))
+                            }
+                          />
+                        }
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="select-and-post-div">
+                    <div className="select-Image-container">
+                      <label className="image-btn" htmlFor="upload">
+                        <BsImageFill />
+                        <input
+        
+                          type="file"
+                          id="upload"
+                          style={{ display: "none" }}
+                          accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/jpg,image/webp"
+                          onChange={(event) => {
+                            handleUpload(event);
+                          }}
+                        />
+                      </label>
+                    </div>
+                    <div className="edit-post-btn">
+                      <button onClick={()=> handleEditPost(editedData)}>Post</button>
+                    </div>
+                  </div>
+
+                  
+                </div>
+              </div>
+            )}
+            <AiFillDelete
+              className="deletePost"
+              onClick={(e) => deleteClickHandler(e, postData._id)}
+            />
           </div>
         )}
       </div>
