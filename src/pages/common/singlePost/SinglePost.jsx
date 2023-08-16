@@ -52,7 +52,7 @@ const SinglePost = ({ postData }) => {
     }
 
     try{
-      const {data:{posts}} = await axios.post(`/api/posts/edit/:${editedData._id}`, {postData:{...postData}}, {headers:{authorization:token}});
+      const {data:{posts}} = await axios.post(`/api/posts/edit/${editedData._id}`, {postData:{...postData}}, {headers:{authorization:token}});
       console.log('posts after edit', posts);
       dataDispatch({
         type: "AllPosts",
