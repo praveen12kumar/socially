@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import {
   BsRocketFill,
@@ -14,35 +14,50 @@ import { DataContext } from "../../../context/DataContext";
 
 const LeftDiv = () => {
   const { logout } = useContext(AuthContext);
-  const {currentuser} = useContext(DataContext)
-  const [active, setActive] = useState("home");
- 
+  const {currentuser, active, dataDispatch} = useContext(DataContext)
   
+ 
   const navigate = useNavigate();
+
   const handleLogout = () => {
     logout();
     navigate("/");
   };
 
-
-  const handleHome = ()=>{
-    setActive("Home");
+  const handleHome = (value)=>{
+    dataDispatch({
+      type: "addActive",
+      payload:value
+    })
     navigate("/");
   }
-  const handleBookmark = ()=>{
-    setActive("bookmark");
+  const handleBookmark = (value)=>{
+    dataDispatch({
+      type: "addActive",
+      payload:value
+    })
     navigate('/bookmark');
   }
-  const handleExplore = ()=>{
+  const handleExplore = (value)=>{
+    dataDispatch({
+      type: "addActive",
+      payload:value
+    })
     navigate("/explore");
-    setActive("explore");
- 
-}
+  }
+
+  const handleProfile = (value)=>{
+    dataDispatch({
+      type: "addActive",
+      payload:value
+    })
+    navigate("/profile");
+  }
 
   return (
     <div className="explore-section">
       <div className="explore-main">
-        <div className="home-icon" onClick={handleHome}>
+        <div className="home-icon" onClick={()=>handleHome("home")}>
           <span>
             <AiOutlineHome />{" "}
           </span>{" "}
@@ -51,7 +66,7 @@ const LeftDiv = () => {
             Home{" "}
           </span>
         </div>
-        <div className="explore" onClick={handleExplore}>
+        <div className="explore" onClick={()=>handleExplore("explore")}>
           <span>
             <BsRocketFill />
           </span>
@@ -59,7 +74,7 @@ const LeftDiv = () => {
             Explore
           </span>
         </div>
-        <div className="bookmark" onClick={handleBookmark }>
+        <div className="bookmark" onClick={()=>handleBookmark("bookmark") }>
           <span>
             <BsBookmarkHeartFill />
           </span>{" "}
@@ -67,15 +82,17 @@ const LeftDiv = () => {
             Bookmark
           </span>
         </div>
-        <div className="profile" onClick={() => setActive("profile")}>
+
+        {/* <div className="profile" onClick={() => handleProfile("profile")}>
           <span>
             <FaUserAlt />
           </span>{" "}
           <span style={{ fontWeight: active === "profile" ? "600" : "400" }}>
-            {" "}
             Profile
           </span>
-        </div>
+        </div> */}
+
+
         <div className="logout-section">
           <button className="logout-btn" onClick={handleLogout}>
             Logout

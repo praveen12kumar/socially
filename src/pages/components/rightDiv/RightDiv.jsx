@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {BsSearch} from "react-icons/bs";
 import { useContext } from "react";
 import SuggestionCard from "./components/SuggestionCard";
@@ -18,8 +18,6 @@ const RightDiv = () => {
 
   const filteredUsers = allUsers?.filter((user)=> user.firstName.toLowerCase().includes(searchUser.toLowerCase()) || user.lastName.toLowerCase().includes(searchUser.toLowerCase()))
 
-  
-  
   return (
     <div className="suggestions-section">
       <div className="search-section">

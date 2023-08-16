@@ -17,6 +17,7 @@ export const DataProvider = ({children})=>{
         postData:{},
         searchPost:"",
         searchUser:"",
+        active:"home",
     }
     const [state, dispatch] = useReducer(dataReducer, initialValues);
     const encodedToken = (localStorage.getItem('encodedToken'));
@@ -107,6 +108,7 @@ export const DataProvider = ({children})=>{
             followedUser: state.followedUser,
             searchPost: state.searchPost,
             searchUser: state.searchUser,
+            active: state.active,
             dataDispatch: dispatch,
             getAllUsersHandler,
             getCurrentUser,

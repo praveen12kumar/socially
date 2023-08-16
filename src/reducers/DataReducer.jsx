@@ -9,6 +9,11 @@ export const dataReducer = (state, {type, payload})=>{
             return{...state, currentuser:{...payload}};
         case "Add-new-user":
             return{...state, allUsers:[...state.allUsers, ...payload]};
+        
+        case "addActive":
+            return{
+                ...state, active:payload
+            }
         case "getBookmarks":
             return{...state, bookmarks:[...payload]};
         case "getNewBookmarks":

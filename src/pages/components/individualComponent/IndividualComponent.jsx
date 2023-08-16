@@ -30,7 +30,7 @@ const IndividualComponent = () => {
         {},
         { headers: { authorization: token } }
       );
-      console.log("unfollow user: ", user, followUser);
+      //console.log("unfollow user: ", user, followUser);
       toast.warn("user unfollowed");
       dataDispatch({
         type: "update_follow_user",
